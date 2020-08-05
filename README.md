@@ -1,11 +1,7 @@
-# travis_qmake_gcc_cpp11_boost_test_gcov
+# [Codecov](https://codecov.io) qmake_gcc_cpp11_boost_test_gcov Example
 
-[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
-![Whitespace](Whitespace.png)
-[![Codecov logo](Codecov.png)](https://www.codecov.io)
-
-[![Build Status](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov.svg?branch=master)](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov)
 [![codecov.io](https://codecov.io/github/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov?branch=master)
+[![Build Status](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov.svg?branch=master)](https://travis-ci.org/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test_gcov)
 
 This GitHub is part of [the Travis C++ Tutorial](https://github.com/richelbilderbeek/travis_cpp_tutorial).
 
@@ -17,10 +13,38 @@ The goal of this project is to have a clean Travis CI build, with specs:
  * Code coverage: yes
  * Source: multiple files
 
-More complex builds:
- * Use C++14: [travis_qmake_gcc_cpp14_boost_test_gcov](https://www.github.com/richelbilderbeek/travis_qmake_gcc_cpp14_boost_test_gcov)
+## Guide
+### Travis Setup
 
-Less complex builds:
- * No code coverage: [travis_qmake_gcc_cpp11_boost_test](https://www.github.com/richelbilderbeek/travis_qmake_gcc_cpp11_boost_test)
+Add to your `.travis.yml` file.
+```yml
+language: cpp
+compiler: gcc
+addons:
+  apt:
+    packages: libboost-all-dev
 
-We are happy to help if you have any questions. Please contact email our Support at [support@codecov.io](mailto:support@codecov.io)
+before_install:
+  - sudo pip install codecov
+
+script:
+  - ./build_test.sh
+
+after_success:
+  - codecov
+```
+
+### Produce Coverage Reports
+#### gcov-5
+```sh
+gcov-5 main_test.cpp
+gcov-5 my_functions.cpp
+```
+
+### Private Repo
+Repository tokens are required for (a) all private repos, (b) public repos not using Travis-CI, CircleCI or AppVeyor. Find your repository token at Codecov and provide via appending `-t <your upload token>` to you where you upload reports.
+
+## Links
+- [Community Boards](https://community.codecov.io)
+- [Support](https://codecov.io/support)
+- [Documentation](https://docs.codecov.io)
